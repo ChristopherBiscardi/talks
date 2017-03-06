@@ -1,0 +1,44 @@
+# Demystifying GraphQL Clients
+
+This talk will cover raw strings, Relay, and Apollo individually, supported by real-world examples, before contrasting them against each other and taking a look at where each is going in the future. The audience will walk away with the ability to make informed decisions about which client to use for their own applications and the impact that will have on their server-side GraphQL implementations.
+
+* Basics
+  - Briefly cover the basics of GraphQL string-based
+  querying. Whitespace, Fragments, complexities and flexibility
+  introduced by not having enough "smarts".
+* Relay 1
+  - First major client
+  - General Points
+    * Query Diffing
+    * Queries are treated as "blob like" (mangled Fragment names, etc)
+    * react-relay component query isolation mechanisms and Fragments
+    * babel-relay-plugin type schema checking
+    * Relay Containers and React Router
+    * Impacts on GraphQL Schema Design (node() interface, pagination)
+    * Difficulties with Mutation API
+    * NetworkInterface, batching and react-relay-network-layer
+    * Isomorphic Relay
+* Apollo
+  - Overview
+    * Written in TypeScript
+    * "Multi-platform" (React/Angular, Native iOS/Android, Vanilla)
+  - General Points
+    * Static Analysis
+    * Network Interface
+    * Modularity: graphql-(fragments|tag|anywhere)
+    * (Middle/After)ware
+    * Refetch, Polling and Subscriptions
+    * Mutations, Optimistic UI and updating data
+    * Integration with Redux
+    * Cache Normalization
+    * fetchMore and Pagination
+    * eslint-plugin-graphql
+* Apollo/Relay are not the only clients, but the most used ones
+* Recap (Apollo vs Relay 1 and 2)
+  - Universal/Isomorphic Usage
+  - Modularity
+  - GraphQL Schema Impact
+  - Mutations
+  - Static Analysis
+  - Redux and integrating into existing apps
+  - graphql-(relay)-js vs graphql-tools

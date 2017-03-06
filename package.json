@@ -1,0 +1,12 @@
+{
+  "name": "talks",
+  "version": "1.0.0",
+  "description": "Talks and proposals",
+  "main": "index.js",
+  "repository": "https://github.com/ChristopherBiscardi/talks",
+  "author": "Christopher Biscardi <chris@christopherbiscardi.com> (@chrisbiscardi)",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "2.0.0-beta.38"
+  }
+}
