@@ -1,0 +1,8 @@
+<BrowserRouter
+  basename={optionalString}
+  forceRefresh={optionalBool}
+  getUserConfirmation={optionalFunc}
+  keyLength={optionalNumber}
+>
+  <App/>
+</BrowserRouter>

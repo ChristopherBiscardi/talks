@@ -1,0 +1,8 @@
+const f1 = css({ fontSize: '1rem' });
+const red = css({ background: 'red' });
+const f1Red = css({
+  [`&.${f1}.${red}`]: { fontSize: '2rem' }
+});
+
+// ...but you still have to use all three selectors
+<div class={`${f1} ${red} ${f1red}`}></div>

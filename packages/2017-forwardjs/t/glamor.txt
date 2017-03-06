@@ -1,0 +1,6 @@
+// Or use merge to output a single css selector
+const f1 = css({ fontSize: '1rem' });
+const red = css({ background: 'red' });
+const f1Red = css(f1, red, { fontSize: '2rem' });
+
+<div class={rule}></div>

@@ -1,0 +1,21 @@
+class Breadcrumbs extends React.Component {
+  static propTypes = {
+    baseUrl: React.PropTypes.string,
+    url: React.PropTypes.string
+  };
+  render() {
+    return (
+      <ul className="breadcrumbs">
+        <li><a href={`${baseUrl}/`}>Home</a></li>
+        {this.props.url && this.props.url.split("/").map((v, i, arr) => {
+            const crumbURL = _.take(arr, i + 1).join("/");
+            if (i === arr.length) {
+              return <li><a href={crumbURL}>...</a></li>;
+            } else {
+              return <li><a href={`${baseUrl}${crumbURL}`}>{site.name}</a></li>;
+            }
+          })}
+      </ul>
+    );
+  }
+}

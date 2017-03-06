@@ -1,0 +1,9 @@
+const body = ReactDOM.renderToString(<App/>);
+const html = ReactDOM.renderToStaticMarkup(
+  <Html
+    body={body}
+    assets={locals.assets}
+    bundleAssets={locals.assetsPluginHash}
+    data={initialState}
+  />
+);

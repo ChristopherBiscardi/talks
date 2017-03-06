@@ -1,0 +1,13 @@
+const Breadcrumbs = ({ baseUrl, url }: { baseUrl: URL, url: URL }) => (
+  <ul className="breadcrumbs">
+    <li><a href={`${baseUrl}/`}>Home</a></li>
+    {url && url.split("/").map((v, i, arr) => {
+        const crumbURL = _.take(arr, i + 1).join("/");
+        if (i === arr.length) {
+          return <li><a href={crumbURL}>...</a></li>;
+        } else {
+          return <li><a href={`${baseUrl}${crumbURL}`}>{site.name}</a></li>;
+        }
+      })}
+  </ul>
+);

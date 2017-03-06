@@ -1,0 +1,5 @@
+const html = ReactDOMServer.renderToString(
+  <StaticRouter location={req.url} context={context}>
+    <App />
+  </StaticRouter>
+);
