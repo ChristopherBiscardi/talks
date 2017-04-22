@@ -1,11 +1,43 @@
 # Demystifying GraphQL Clients
 
-This talk will cover raw strings, Relay, and Apollo individually, supported by real-world examples, before contrasting them against each other and taking a look at where each is going in the future. The audience will walk away with the ability to make informed decisions about which client to use for their own applications and the impact that will have on their server-side GraphQL implementations.
+This talk will cover raw strings, Relay, and Apollo individually,
+supported by real-world examples, before contrasting them against each
+other and taking a look at where each is going in the future. The
+audience will walk away with the ability to make informed decisions
+about which client to use for their own applications and the impact
+that will have on their server-side GraphQL implementations.
 
 * Basics
   - Briefly cover the basics of GraphQL string-based
   querying. Whitespace, Fragments, complexities and flexibility
   introduced by not having enough "smarts".
+  - GraphQL is a Type System
+  - query subselection
+  - Query arguments
+  - Fragments
+  - GraphiQL
+    * [Subscriptions](https://dev-blog.apollodata.com/how-to-use-subscriptions-in-graphiql-1d6ab8dbd74b)
+* Relay 2
+  - Ground-up rewrite of Relay 1
+    * Optimized for low-end mobile devices
+    * Simpler and more predictable Developer Experience
+  - What's New
+    * Static Queries
+    * Arbitrary Mutations
+    * Client State
+    * Garbage Collection (Cache Eviction)
+    * Offline Caching
+    * Connection Streaming
+    * Deferred Queries
+  - Data management for hierarchical component-based view architectures
+    * component specifies it's data dependencies as GraphQL
+  - Schema Conventions
+    * node field
+    * pagination
+  - Babel
+  - local data
+  - subscriptions
+  - Colocation of data. Only view data you request.
 * Relay 1
   - First major client
   - General Points
@@ -42,3 +74,6 @@ This talk will cover raw strings, Relay, and Apollo individually, supported by r
   - Static Analysis
   - Redux and integrating into existing apps
   - graphql-(relay)-js vs graphql-tools
+
+Relay 2
+  - Effectively a complete rewrite of Relay
