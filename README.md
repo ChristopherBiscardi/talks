@@ -37,3 +37,7 @@ including Fields, Fragments, Arguments, etc. Then we move into why you
 would want to use a GraphQL client like Relay or Apollo and dive into
 concrete examples to reveal how Apollo 1.0 and Relay Modern enable
 advanced use cases such as optimistic UI and prefetching.
+
+# Generating GraphQL APIs for Content-Based Sites
+
+[video](https://www.youtube.com/watch?v=bc_28oOhoBQ)

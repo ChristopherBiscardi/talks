@@ -1,8 +1,9 @@
-| Conference      | Year | Talk Title                                | Given            |
-|-----------------+------+-------------------------------------------+------------------|
-| forwardjs       | 2017 | static-sites-through-spas-and-graphql     | <2017-03-01 Wed> |
-| fluent          | 2017 | advanced-component-libraries              |                  |
-| reactjsconf     | 2017 | advancing-component-libraries-with-glamor |                  |
-| react-europe    | 2017 | advanced-static-sites                     |                  |
-| react-amsterdam | 2017 | demystifying-graphql-clients              | <2017-04-21 Fri> |
-|                 |      |                                           |                  |
+| Conference      | Year | Talk Title                                      | Given            |
+|-----------------+------+-------------------------------------------------+------------------|
+| graphql-sf      | 2017 | generating-graphql-apis-for-content-based-sites | <2017-01-19 Thu> |
+| forwardjs       | 2017 | static-sites-through-spas-and-graphql           | <2017-03-01 Wed> |
+| fluent          | 2017 | advanced-component-libraries                    |                  |
+| reactjsconf     | 2017 | advancing-component-libraries-with-glamor       |                  |
+| react-europe    | 2017 | advanced-static-sites                           |                  |
+| react-amsterdam | 2017 | demystifying-graphql-clients                    | <2017-04-21 Fri> |
+|                 |      |                                                 |                  |
