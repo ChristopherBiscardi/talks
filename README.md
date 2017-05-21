@@ -9,7 +9,10 @@ talks they develop into.
 
 * **PDFs** can be found in [./pdfs](./pdfs/). They are named by `talkTitle_location_year`.
 * **Source** for the PDFs can be found in [./packages](./packages/).
-* **Proposals** are organized in [proposals/submissions.org](./packages/proposals/submissions.org) and detailed in [proposals/proposals](./packages/proposals/proposals/).
+* **Proposals** are organized
+  in [proposals/submissions.org](./packages/proposals/submissions.org)
+  and detailed
+  in [proposals/proposals](./packages/proposals/proposals/).
 
 # Static Sites Through SPAs and GraphQL
 
@@ -41,3 +44,7 @@ advanced use cases such as optimistic UI and prefetching.
 # Generating GraphQL APIs for Content-Based Sites
 
 [video](https://www.youtube.com/watch?v=bc_28oOhoBQ)
+
+# Developing and Deploying Haskell on Docker
+
+[video](https://begriffs.com/posts/2015-08-11-dev-deploy-haskell-docker.html)
