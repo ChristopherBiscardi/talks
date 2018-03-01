@@ -1,0 +1,12 @@
+➜ prisma init slim-01
+? How to set up a new Prisma service?
+
+Created 3 new files:
+
+  prisma.yml Prisma service definition
+  datamodel.graphql    GraphQL SDL-based datamodel (foundation for database)
+  .graphqlconfig.yml   Configuration file for GraphQL tooling (Playground, IDE, …)
+
+Open the new folder via $ cd slim-01. You can now run $ prisma deploy to deploy your database service.
+
+For next steps follow this tutorial: https://bit.ly/prisma-graphql-first-steps
