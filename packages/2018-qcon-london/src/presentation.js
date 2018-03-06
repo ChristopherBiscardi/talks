@@ -1,8 +1,8 @@
 // Import React
 import React from "react";
-
 // Import Spectacle Core tags
 import {
+  Appear,
   BlockQuote,
   Cite,
   CodePane,
@@ -26,6 +26,8 @@ import "./prism.css";
 // Import theme
 import createTheme from "spectacle/lib/themes/default";
 
+const DIAGRAM_BG_COLOR = "rgb(240,244,247)";
+
 // Require CSS
 require("normalize.css");
 
@@ -34,7 +36,8 @@ const theme = createTheme(
     primary: "white",
     secondary: "#1F2022",
     tertiary: "#03A9FC",
-    quartenary: "#CECECE"
+    quartenary: "#CECECE",
+    diagram: DIAGRAM_BG_COLOR
   },
   {
     primary: "Inter UI",
@@ -50,9 +53,28 @@ export default class Presentation extends React.Component {
         transitionDuration={500}
         theme={theme}
       >
-        <Slide transition={["zoom"]} bgColor="primary">
+        <Slide
+          transition={["zoom"]}
+          bgColor="primary"
+          notes={`round of applause for Jamund
+<br/><br/>
+My context is mostly high-growth startups, so I learned a lot from his talk
+<br/><br/>
+This talk is *title*
+<br/><br/>
+We're going to talk about GraphQL implementations that prioritize the GraphQL Schema Language and how that can be used to improve human to human communication
+<br/><br/>
+We'll also cover a few tools`}
+        >
           <Heading size={1} fit caps lineHeight={1} textColor="secondary">
-            Parallelizing Product Development with GraphQL
+            Parallelizing
+          </Heading>
+
+          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
+            Product Development
+          </Heading>
+          <Heading size={1} fit caps lineHeight={1} textColor="tertiary">
+            with GraphQL
           </Heading>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
@@ -82,7 +104,77 @@ export default class Presentation extends React.Component {
         <Slide
           transition={["fade"]}
           bgColor="tertiary"
-          notes={`Primary way to define behavior<br/><br/>like protobufs, avro, or thrift
+          notes={`First let's set the context for the class of applications we're talking about.
+<br/><br/>
+I'm also going to argue that the class of applications I'm talking about should be the first option in your toolbelt
+`}
+        >
+          <Heading size={6} fit textColor="primary" caps>
+            Application
+          </Heading>
+          <Heading size={6} fit textColor="primary" caps>
+            Architecture
+          </Heading>
+        </Slide>
+        <Slide
+          transition={["fade"]}
+          bgColor="diagram"
+          notes={`API Driven Applications
+<br/><br/>
+contrast to server-rendered
+<br/><br/>
+The approach being that there are two objects you really need to care about (ui/db) and by placing this layer in between them, they become less brittle
+<br/><br/>
+We can abstract as we grow. microservices && web, native, sketch`}
+        >
+          <Image src={require("./basic-api-drive-development.png")} />
+        </Slide>
+        <Slide
+          transition={["fade"]}
+          bgColor="diagram"
+          notes={`This is a GraphQL talk, so it's no surprise that I'll tell you GraphQL should be this API layer and clients should use the GraphQL query language to retrieve and mutate data`}
+        >
+          <Image
+            src={require("./basic-api-drive-development-with-graphql.png")}
+          />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="diagram"
+          notes={`A developing application
+<br/><br/>
+"unintentional monolith datastore"
+<br/><br/>
+gateways
+<br/><br/>
+Multiple UIs. People are talking about DesignOps and rendering UI with production data into Sketch!
+`}
+        >
+          <Image src={require("./api-gateway-pattern.png")} />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="diagram"
+          notes={`Once again it's no surprise that I'm going to tell you that GraphQL let's you scale this approach to many clients and many backend services
+<br/><br/>
+truth is that we'll never know what clients will exist in the future
+<br/><br/>
+Architecting in this way is as useful for small applications as it is for scaling out
+`}
+        >
+          <Image src={require("./api-gateway-pattern-with-graphql.png")} />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="tertiary"
+          notes={`As I start talking about why we need GraphQL here, focus on the Schema Definition Language
+<br/><br/>
+Primary way to define behavior
+<br/><br/>
+like protobufs, avro, or thrift
 `}
         >
           <Heading size={6} textColor="primary" caps>
@@ -90,7 +182,51 @@ export default class Presentation extends React.Component {
           </Heading>
         </Slide>
 
-        <Slide notes={`looks like this<br/><br/>a bit like json`}>
+        <Slide
+          bgColor="rgb(18,32,44)"
+          notes={`How do we know what to query?
+<br/><br/>
+Never have to mention HATEOS again`}
+        >
+          <Image src={require("./graphql-playground.gif")} />
+        </Slide>
+
+        <Slide notes={`raise hand if first query<br/><br/>vaguely jsony`}>
+          <Heading>Queries</Heading>
+          <CodePane
+            lang="graphql"
+            source={`{
+  drafts {
+    title
+  }
+}`}
+          />
+        </Slide>
+        <Slide
+          notes={`what you get back
+<br/><br/>
+no imperative ajax requests`}
+        >
+          <Heading>Results</Heading>
+          <CodePane
+            lang="json"
+            source={`{
+  "data" {
+    "drafts": [{
+      "title": "Solving World Hunger"
+    }]
+  }
+}`}
+          />
+        </Slide>
+
+        <Slide
+          notes={`back to How do we know what to query
+<br/><br/>
+looks like this
+<br/><br/>
+a bit like json`}
+        >
           <Heading>blog schema</Heading>
           <CodePane
             lang="graphql"
@@ -139,19 +275,171 @@ type Blog {
           ]}
         />
 
-        <Slide transition={["fade"]} bgColor="tertiary">
+        <Slide
+          transition={["fade"]}
+          bgColor="tertiary"
+          notes={`Directives are the "everything else" of GraphQL
+<br/><br/>
+custom server implementations
+<br/><br/>
+They enable us to use the SDL to communicate extra information such as deprecation
+`}
+        >
+          <Heading size={4} textColor="primary" caps>
+            Directives
+          </Heading>
+          <Heading size={5} textColor="secondary" caps>
+            Everything Else
+          </Heading>
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="tertiary"
+          notes={`How do we get JSON back?
+<br/><br/>
+Ask for types via query, resolvers are responsible for getting you JSON
+`}
+        >
+          <Heading fit textColor="primary" caps>
+            Resolvers
+          </Heading>
+        </Slide>
+
+        <Slide notes={`fetched Human by id<br/><br/>obj is the human`}>
+          <Heading>Trivial Resolvers</Heading>
+          <CodePane
+            lang="js"
+            source={`Human: {
+  name(obj, args, context) {
+    return obj.name
+  }
+}`}
+          />
+        </Slide>
+
+        <Slide notes={`get from database<br/><br/>return promise`}>
+          <Heading>Async Resolvers</Heading>
+          <CodePane
+            lang="js"
+            source={`human(obj, args, context) {
+  return context.db.loadHumanByID(args.id).then(
+    userData => new Human(userData)
+  )
+}`}
+          />
+        </Slide>
+
+        <Slide notes={`Power lies in custom implementations`}>
+          <Heading fit>Directive Resolvers</Heading>
+          <CodePane
+            lang="graphql"
+            source={`directive @upper on FIELD_DEFINITION
+
+type Query {
+  hello: String @upper
+}`}
+          />
+        </Slide>
+        <Slide notes={`Power lies in custom implementations`}>
+          <Heading fit>Directive Resolvers</Heading>
+          <CodePane
+            lang="js"
+            source={`upper(next, src, args, context ) {
+  return next().then((str) => {
+    if (typeof(str) === 'string') {
+      return str.toUpperCase();
+    }
+    return str;
+  });
+}`}
+          />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="tertiary"
+          notes={`Greenfield OR Docker rewrite (large scale)<br/><br/>two django apps -> apis`}
+        >
           <Heading size={6} textColor="primary" caps>
             Scenario 1
           </Heading>
           <Heading textColor="secondary">A New Product</Heading>
         </Slide>
-        <Slide transition={["fade"]} bgColor="primary">
-          <Notes>
-            prisma is two things. A database interface and a graphql api
-          </Notes>
+        <Slide
+          transition={["fade"]}
+          bgColor="primary"
+          notes={`two ways to approach a new product.
+<br/><br/>
+db schema -> gql (PostGraphile)
+<br/><br/>
+gql -> db`}
+        >
           <Image src={require("./prisma-logo.png")} />
         </Slide>
-        <Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="primary"
+          notes={`prisma is two things. A database interface and a graphql api`}
+        >
+          <Image src={require("./prisma-architecture.png")} />
+        </Slide>
+
+        <Slide
+          notes={`one of the hardest parts of GraphQL
+<br/><br/>
+can get very complicated`}
+        >
+          <Heading fit>Resolving with SQL</Heading>
+          <CodePane
+            lang="sql"
+            source={`return mysql.query(\`SELECT
+  "user"."id" AS "id",
+  "posts"."id" AS "postId",
+  "posts"."title" AS "postTitle",
+  "posts"."body" AS "postText",
+  "posts"."tags" AS "postTags",
+  "posts"."created" AS "postCreated",
+FROM accounts AS "user"
+LEFT JOIN posts ON "user".id = "posts".authorId
+WHERE "user".id = \${obj.id}
+AND isPublished = 1
+LIMIT \${args.skip}, 1000\`)
+`}
+          />
+        </Slide>
+        <Slide
+          notes={`prisma-binding
+<br/><br/>
+built on graphql-binding
+<br/><br/>`}
+        >
+          <Heading fit>SQL with Prisma</Heading>
+          <CodePane
+            lang="js"
+            source={`publicPosts(obj, args, ctx, info) {
+  return ctx.prisma.query.posts(
+    where: {
+      author: { id: obj.id },
+      isPublished: true,
+    },
+    skip: args.skip,
+    info // enables schema stitching
+  )
+}`}
+          />
+        </Slide>
+
+        <Slide
+          notes={`lets take a look at setting up a new prisma project
+<br/><br/>
+minimal is toy version
+<br/><br/>
+fullstack is the api gateway + database APIs
+<br/><br/>
+gateway is how you connect to other microservices`}
+        >
           <Heading>prisma init</Heading>
           <CodePane
             lang="markup"
@@ -163,7 +451,13 @@ type Blog {
           />
         </Slide>
 
-        <Slide>
+        <Slide
+          notes={`node-basic. No auth, but auth can be implemented with directives too
+<br/><br/>
+TypeScript == autocomplete
+<br/><br/>
+fullstack with UI is a nono. Docker/Universal/complicated++`}
+        >
           <Heading>prisma init</Heading>
           <CodePane
             lang="markup"
@@ -179,7 +473,11 @@ Running $ graphql create ...
   react-fullstack-basic   React app + GraphQL server (incl. database )`}
           />
         </Slide>
-        <Slide>
+        <Slide
+          notes={`deploy to prisma cloud OR Docker!!
+<br/><br/>
+you can also deploy to a kube cluster with yaml from the docs`}
+        >
           <Heading>prisma deploy</Heading>
           <CodePane
             lang="markup"
@@ -188,27 +486,22 @@ Running $ prisma deploy...
 
 ? Please choose the cluster you want to deploy "full-03@dev" to
 
-  prisma-eu1      Public development cluster (hosted in EU on Prisma Cloud)
-  prisma-us1      Public development cluster (hosted in US on Prisma Cloud)
+  prisma-eu1      Public development cluster
+  prisma-us1      Public development cluster
 ❯ local           Local cluster (requires Docker)
-
-  Log in or create new account on Prisma Cloud
-
-  Note: When not logged in, service deployments to Prisma Cloud expire after 7 days.
-  You can learn more about deployment in the docs: http://bit.ly/prisma-graphql-deployment`}
+`}
           />
         </Slide>
 
-        <Slide>
+        <Slide
+          notes={`migrations! graphql types to mysql types
+<br/><br/>
+Seed some data into the database`}
+        >
           <Heading>prisma deploy</Heading>
           <CodePane
             lang="markup"
-            source={` Please choose the cluster you want to deploy "full-03@dev" to
-Added cluster: local to prisma.yml
-Creating stage dev for service full-03 ✔
-Deploying service \`full-03\` to stage \`dev\` on cluster \`local\` 201ms
-
-Changes:
+            source={`Changes:
 
   Post (Type)
   + Created type \`Post\`
@@ -224,12 +517,6 @@ Applying changes 1.1s
 Hooks:
 Importing seed dataset from \`seed.graphql\` 498ms
 
-Your GraphQL database endpoint is live:
-
-  HTTP:  http://localhost:4466/full-03/dev
-  WS:    ws://localhost:4466/full-03/dev
-
-Checking, if schema file changed 180ms
 Writing database schema to \`src/generated/prisma.graphql\`  0ms`}
           />
         </Slide>
@@ -273,7 +560,7 @@ Writing database schema to \`src/generated/prisma.graphql\`  0ms`}
           />
         </Slide>
 
-        <Slide>
+        <Slide notes={`mysql data dump in Docker init.d vs GraphQL Mutations`}>
           <Heading>Seeds</Heading>
           <CodePane
             lang="graphql"
@@ -305,7 +592,7 @@ Writing database schema to \`src/generated/prisma.graphql\`  0ms`}
           />
         </Slide>
 
-        <Slide>
+        <Slide notes={`playground script from boilerplate`}>
           <Heading>playground</Heading>
           <CodePane
             lang="markup"
@@ -326,7 +613,11 @@ Serving playground at http://localhost:3000/playground`}
           <Image src={require("./graphql-playground.gif")} />
         </Slide>
 
-        <Slide>
+        <Slide
+          notes={`life is change and engineering is no different
+<br/><br/>
+communicating deprecation`}
+        >
           <Heading>Updating</Heading>
           <CodePane
             lang="graphql"
@@ -345,10 +636,6 @@ Serving playground at http://localhost:3000/playground`}
           <CodePane
             lang="markup"
             source={`➜ yarn prisma deploy
-yarn run v1.3.2
-$ prisma deploy
-Deploying service \`full-03\` to stage \`dev\` on cluster \`local\` 176ms
-
 Changes:
 
   Post (Type)
@@ -360,21 +647,8 @@ Your GraphQL database endpoint is live:
 
   HTTP:  http://localhost:4466/full-03/dev
   WS:    ws://localhost:4466/full-03/dev
-
-
-Hooks:
-Checking, if schema file changed 178ms
-Writing database schema to \`src/generated/prisma.graphql\`  0ms
-Running $ graphql prepare...
-✨  Done in 6.29s.`}
+`}
           />
-        </Slide>
-        <Slide notes={`typical == handling in field resolvers`}>
-          primsa.exists and directive based auth
-        </Slide>
-        <Slide notes={`very manual`}>codepane: resolver+context example</Slide>
-        <Slide notes={`exactly like express middleware`}>
-          directive resolvers
         </Slide>
 
         <Slide
@@ -391,10 +665,24 @@ Running $ graphql prepare...
           <Heading textColor="secondary">Frontend</Heading>
         </Slide>
 
-        <Slide notes={`point it at your schema.graphql`}>graphql-faker</Slide>
-        <Slide notes={`@fake takes a type`}>codepane: @fake directive</Slide>
-        <Slide notes={`@examples takes a list of values`}>
-          codepane: @examples directive
+        <Slide
+          notes={`point it at your schema.graphql or extend a server<br/><br/>don't have to wait for backend`}
+        >
+          <Heading>graphql-faker</Heading>
+          <Image src={require("./faker-extend-mode.gif")} />
+        </Slide>
+        <Slide
+          notes={`@fake takes a type<br/><br/>@examples take a list of values`}
+        >
+          <Heading fit>Faker Directives</Heading>
+          <CodePane
+            lang="graphql"
+            source={`type Person {
+  name: String @fake(type: firstName)
+  gender: String @examples(values: ["male", "female"])
+}
+`}
+          />
         </Slide>
 
         <Slide
@@ -407,7 +695,8 @@ Running $ graphql prepare...
         <Slide>
           <Heading>Apollo Boost</Heading>
           <Notes>
-            Remote data fetching<br />Error Handling<br />Local state<br />
+            Preset<br />
+            <br /> Remote data fetching<br />Error Handling<br />Local state<br />
           </Notes>
           <List>
             <ListItem>apollo-client</ListItem>
@@ -420,7 +709,9 @@ Running $ graphql prepare...
         </Slide>
         <Slide>
           <Notes>
-            haven’t settled on how to approach client-side schema yet
+            haven’t settled on how to approach client-side schema yet<br />
+            <br />
+            Means UI can proceed without backend support once again
           </Notes>
           <Heading>link-state</Heading>
           <CodePane
@@ -484,6 +775,64 @@ type Mutation {
           />
         </Slide>
 
+        <Slide
+          notes={`we have the full generated schema<br/><br/>Only have to implement the resolvers`}
+        >
+          <Heading fit>gqlgen -out generated.go -package main</Heading>
+          <CodePane
+            lang="go"
+            source={`type Query struct {
+	PostsID           int
+	PostID            int
+	PostsConnectionID int
+	NodeID            int
+}
+type PostWhereInput struct {
+	AND                   []PostWhereInput
+	OR                    []PostWhereInput
+	ID                    *string
+	Id_not                *string
+	Id_in                 []string
+	Id_not_in             []string
+	Id_lt                 *string
+}
+`}
+          />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="diagram"
+          notes={`test in production
+<br/><br/>
+ingress
+<br/><br/>
+shadow proxy<br/><br/>`}
+        >
+          <Image src={require("./gql-test-in-production.png")} />
+        </Slide>
+
+        <Slide transition={["zoom"]} bgColor="primary">
+          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
+            Credits
+          </Heading>
+          <List>
+            <ListItem>
+              <span style={{ display: "inline-block", minWidth: "13ch" }}>
+                [presentation]:
+              </span>
+              <a href="http://formidable.com/open-source/spectacle/">
+                Spectacle
+              </a>
+            </ListItem>
+            <ListItem>
+              <span style={{ display: "inline-block", minWidth: "13ch" }}>
+                [diagrams]:
+              </span>
+              <a href="https://whimsical.co">whimsical.co</a>
+            </ListItem>
+          </List>
+        </Slide>
         <Slide transition={["zoom"]} bgColor="primary">
           <Heading size={1} fit caps lineHeight={1} textColor="secondary">
             Q & A
