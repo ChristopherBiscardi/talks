@@ -1,0 +1,24 @@
+{
+  "name": "2018-gothamgo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.5",
+    "@fortawesome/fontawesome-free-brands": "^5.0.10",
+    "@fortawesome/fontawesome-free-solid": "^5.0.10",
+    "@fortawesome/react-fontawesome": "^0.0.18",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "spectacle-code-slide": "^0.5.2",
+    "spectacle-scripts": "2.0.0"
+  },
+  "resolutions": {
+    "prismjs": "1.6.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
