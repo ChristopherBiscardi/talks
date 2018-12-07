@@ -1,59 +1,38 @@
-# Spectacle Boilerplate
 
-## Contents
+# mdx-deck basic template
 
-- [Reference](#reference)
-- [Getting Started](#getting-started)
-- [Build & Deployment](#build-deployment)
+This was generated with [mdx-deck][]'s `npm init deck` command.
 
-## Reference
+## Development
 
-The Spectacle core API is available at [https://github.com/FormidableLabs/spectacle/blob/master/README.md](https://github.com/FormidableLabs/spectacle/blob/master/README.md).
+To run the presentation deck in development mode:
 
-For more information about MDX syntax and how it all works, check out the [MDX documentation](https://mdxjs.com/).
-
-### Slides
-
-Slides are separated with `---`.
-
-To customize specific MDX functionality in Spectacle Boilerplate MDX, including what characters are used to demarcate slide breaks, refer to the `loader.js` file. We don't recommend altering this functionality unless necessary.
-
-## Getting Started
-
-After downloading the boilerplate, your first order of business is to open a terminal and run 
-```bash
-yarn
-```
-or 
-```bash
-npm install
-```
-
-Next, run 
-```bash
-rm -R .git
-```
-to remove the existing version control.
-
-Then, to start up the local server, run
-```bash
-yarn start
-```
-or
-```bash
+```sh
 npm start
 ```
 
-Open a browser and hit [http://localhost:3000](http://localhost:3000), and you're ready to roll. Modify `index.mdx` to see changes, but the best part about MDX is that you can create your own React components and import them into the `index.mdx` file to seamlessly integrate with markdown!
+Edit the [`deck.mdx`](deck.mdx) file to get started.
 
-## Build & Deployment
+## Exporting
 
-Building the dist version of the project is as easy as running
-```bash
+To build the presentation deck as static HTML:
+
+```sh
 npm run build
 ```
 
-If you want to deploy the slideshow to surge, run 
-```bash
-npm run deploy
+To export a PDF:
+
+```sh
+npm run pdf
 ```
+
+To export an image of the title slide:
+
+```sh
+npm run image
+```
+
+For more documentation see the [mdx-deck][] repo.
+
+[mdx-deck]: https://github.com/jxnblk/mdx-deck
