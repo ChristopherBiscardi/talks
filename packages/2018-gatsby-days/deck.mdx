@@ -110,7 +110,6 @@ module.exports = {
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: `your_space_id`,
-        // Learn about environment variables: https://gatsby.app/env-vars
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
       }
     }
@@ -512,10 +511,8 @@ mirror the path, replace the component
 
 # Shadowing
 
-* gatsby-theme-blog
-  * `src/components/bio.js`
-* user
-  * `src/components/gatsby-theme-blog/bio.js`
+* gatsby-theme-blog<br/> `src/components/bio.js`
+* user<br/>`src/components/gatsby-theme-blog/bio.js`
 
 ---
 
@@ -539,14 +536,18 @@ export default props => <div {...props}/>
 
 ---
 
+```notes
 # Shadow Query Component
+```
+
+export default FullScreenCode
 
 ```jsx
 import React from "react"
 import { StaticQuery, graphql } from "gatsby"
 import RenderComponent from './my-render-component';
 // or
-// import RenderComponent from 'gatsby-theme-blog/src/component/render-component.js';
+// 'gatsby-theme-blog/src/component/render-component.js';
 
 export default props => (
   <StaticQuery
@@ -567,6 +568,8 @@ export default props => (
 ---
 
 ```notes
+# [pattern] page templates
+
 Component Shadowing gives rise to new patterns, like splitting out the
 render component of a page template. 
 
@@ -574,7 +577,7 @@ Users can now swap out the entire page template without worrying about
 changing the data that's queried, enabling upgrades.
 ```
 
-# [pattern] Page Templates
+export default FullScreenCode
 
 ```jsx
 // in the theme
@@ -685,6 +688,16 @@ exports.onCreatePage =  async ({ page, actions }, pluginOptions) => {
   }
 }
 ```
+---
+
+```notes
+:call to action:
+```
+
+export default SectionInverted
+
+# Have a Starter?
+## Build a Theme.
 ---
 
 # Useful links
