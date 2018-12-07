@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "version": "1.0.0",
+  "description": "Deck created with mdx-deck",
+  "scripts": {
+    "start": "mdx-deck deck.mdx",
+    "build": "mdx-deck build deck.mdx",
+    "pdf": "mdx-deck pdf deck.mdx",
+    "image": "mdx-deck screenshot deck.mdx",
+    "help": "mdx-deck"
+  },
+  "keywords": [],
+  "author": "Brent Jackson",
+  "license": "MIT",
+  "devDependencies": {
+    "mdx-deck": "^1.6.7"
+  },
+  "name": "2018-gatsby-days",
+  "dependencies": {
+    "gatsby-mdx-theme": "^0.0.6",
+    "lodash": "^4.17.11",
+    "prism-react-renderer": "^0.1.5"
+  }
+}

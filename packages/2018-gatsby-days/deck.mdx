@@ -1,0 +1,693 @@
+import { Head } from "mdx-deck";
+import Main, {Section, SectionInverted} from 'gatsby-mdx-theme/es/layouts';
+import { FullScreenCode } from "mdx-deck/layouts";
+
+export { default as theme } from "./theme";
+
+export default SectionInverted
+
+<Head>
+  <title>Gatsby Themes</title>
+</Head>
+
+> Introducing
+# Gatsby Themes
+
+---
+
+```notes
+
+```
+
+# Chris Biscardi
+
+@chrisbiscardi
+
+---
+
+export default SectionInverted
+
+```notes
+What is a theme?
+
+WordPress has themes.
+
+So does hugo.
+
+A set of tokens? (dark vs light)
+```
+
+# Themes?
+
+---
+
+export default Section
+
+```notes
+sources: CMSs like Contentful, Drupal, WordPress, etc
+
+types: Markdown, MDX, JSON, YAML, etc
+
+build: prerender, offline support, dynamic UI
+
+sources, types, build into fast deployable artifacts
+```
+
+# What is a Gatsby Site?
+
+
+* Data Sources
+* Data Types
+* Build Process
+* Deploy
+
+---
+
+```notes
+Functionality comes from plugins.
+
+Previous slide translates into source, transformer, and the long tail
+```
+
+# What is a Gatsby Site?
+
+### Plugins
+
+* Source
+*  Transformer
+*  Build
+*  etc
+
+---
+
+# And more
+
+- Brand Components
+- Nav Structure
+- Aggregation
+
+---
+
+```notes
+gatsby-source-filesystem
+
+gatsby-source-contentful
+
+If we're standardized on Contentful, I don't want to write this over and over in every project.
+
+Standardized way to access Contentful
+```
+
+export default Section
+
+# Sourcing Data
+
+```js
+// In your gatsby-config.js
+module.exports = {
+  plugins: [
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `your_space_id`,
+        // Learn about environment variables: https://gatsby.app/env-vars
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+      }
+    }
+  ]
+};
+```
+
+---
+
+export default Section
+
+```notes
+Starts simple
+```
+
+# Transforming Data
+
+```js
+// In your gatsby-config.js
+{
+  plugins: [`gatsby-transformer-remark`],
+}
+```
+
+---
+
+```notes
+This can get a bit long
+
+Fine for my personal blog; Not fine for my teams shipping 2+ sites
+```
+
+export default FullScreenCode;
+
+```js
+{
+  resolve: 'gatsby-transformer-remark',
+  options: {
+    gfm: true,
+    commonmark: true,
+    footnotes: true,
+    pedantic: true,
+    // blocks: ["h2"], Blocks option value can be provided here as an array.
+    excerpt_separator: '<!-- end -->',
+    plugins: [
+      {
+        resolve: 'gatsby-remark-images',
+        options: {
+          maxWidth: 740,
+        },
+      },
+      {
+        resolve: 'gatsby-remark-responsive-iframe',
+        options: {
+          wrapperStyle: 'margin-bottom: 1.0725rem',
+        },
+      },
+      'gatsby-remark-copy-linked-files',
+      {
+        resolve: 'gatsby-remark-smartypants',
+        options: {
+          dashes: 'oldschool',
+        },
+      },
+      'gatsby-remark-prismjs',
+      'gatsby-remark-autolink-headers',
+      'gatsby-remark-katex',
+    ],
+  }
+}
+```
+
+---
+
+```notes
+encode relationships between data
+```
+
+# Encoding Relationships
+
+```js
+{
+  mapping: {
+    "MarkdownRemark.frontmatter.author": "AuthorYaml",
+  },
+}
+```
+
+---
+
+export default Section
+
+```notes
+more plugins
+
+styles, images, link checking, offline support, typography
+```
+
+# Build, etc
+
+```js
+plugins: [
+  {
+    resolve: "gatsby-plugin-typography",
+    options: {
+      pathToConfigModule: "src/utils/typography.js"
+    }
+  },
+  "gatsby-plugin-sharp",
+  "gatsby-plugin-catch-links",
+  "gatsby-plugin-emotion"
+];
+```
+
+---
+
+```notes
+We can end up with a lot of configuration. 
+
+Current solution is Starters
+```
+
+export default SectionInverted
+
+# Reusing Functionality
+
+## Starters
+
+---
+
+```notes
+Starters are entire Gatsby sites that you clone and "start from".
+
+Scaffolding, not reusability
+
+semi-updatable via git pull
+```
+
+# Starters
+
+```shell
+gatsby new gatsby-blog https://github.com/gatsbyjs/gatsby-starter-blog
+# modify stuff
+```
+
+---
+
+```notes
+Starters tend to be collections of isolated behavior
+
+A styling lib
+
+An auth methodology
+
+A blog template
+```
+
+# Starters
+
+* gatsby-starter-blog
+* gatsby-starter-netlify-cms
+* gatsby-starter-bootstrap
+* gatsby-starter-firebase-authentication
+
+---
+
+```notes
+There's a class of problems Starters don't solve adequately.
+
+* A set of similar marketing sites (portfolio of products)
+* Documentation across projects
+* Multiple branded apps (user vs admin or support)
+```
+
+# ~~Starters~~
+
+Not bad, just not what solves our re-use problem
+
+---
+
+```notes
+so what's better than starters?
+
+What do we want out of something beyond starters?
+```
+
+# What's next?
+
+* Re-use config, logic, components, and render-paths
+* Override pieces
+* Extend with additional logic
+* Upgrade (like create-react-app)
+
+---
+
+```notes
+I'm sure you all saw this coming, but this is themes.
+```
+
+export default SectionInverted
+
+# Themes
+
+---
+
+```notes
+Core data structure in Gatsby is gatsby-config
+
+Object that controls the functionality of our site
+
+Single gatsby-config works well for a single site
+```
+export default Section
+
+# gatsby-config.js
+
+- Plugins
+- Mappings
+- SiteMetadata
+- PathPrefix
+
+---
+
+```notes
+What if we could compose gatsby-configs?
+
+* Everything we need for a blog/marketing site/ecommerce site
+* or just Data Sources
+* and the way we process markdown
+```
+
+# Composition?
+
+* Blog/Marketing Site, Ecommerce
+* Drupal, Contentful, etc
+* Markdown Config
+
+---
+
+# Themes
+
+```js
+modules.exports = {
+  __experimentalThemes: ['gatsby-theme-blog']
+}
+```
+
+---
+
+export default FullScreenCode
+
+```notes
+A theme is just a regular gatsby-config
+
+Main difference is how we resolve paths
+
+require.resolve reaches into the theme
+
+path.resolve reaches into the user's site
+```
+
+```js
+{
+  siteMetadata: {
+    title: 'Gatsby Starter Blog',
+    author: 'Kyle Mathews',
+    description: 'A starter blog demonstrating what Gatsby can do.',
+    siteUrl: 'https://gatsbyjs.github.io/gatsby-starter-blog/',
+  },
+  pathPrefix: '/gatsby-starter-blog',
+  plugins: [
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `src/pages`,
+        name: 'pages',
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 590,
+            },
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
+          },
+          'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-smartypants',
+        ],
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        //trackingId: `ADD YOUR TRACKING ID HERE`,
+      },
+    },
+    `gatsby-plugin-feed`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Gatsby Starter Blog`,
+        short_name: `GatsbyJS`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: path.resolve(`src/assets/gatsby-icon.png`),
+      },
+    },
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: require.resolve('./src/utils/typography')
+      },
+    },
+    {
+      resolve: `gatsby-plugin-page-creator`,
+      options: {
+        path: require.resolve(`./src/pages`),
+      },
+    },
+  ],
+}
+```
+
+---
+
+```notes
+Themes take options, but why?
+```
+
+# Options
+
+```js
+module.exports = {
+  __experimentalThemes: [
+    {
+      resolve: "gatsby-theme-blog",
+      options: {
+        some: "value",
+      },
+    },
+  ],
+}
+```
+
+---
+
+```notes
+Plugins have a lot of extra power
+
+gatsby-node
+gatsby-ssr
+gatsby-browser
+```
+
+# Themes are Plugins
+
+* gatsby-node
+* gatsby-ssr
+* gatsby-browser
+
+---
+
+* ~~Re-use config, logic, components, and render-paths~~
+* Override pieces
+* ~~Extend with additional logic~~
+* ~~Upgrade (like create-react-app)~~
+
+---
+
+```notes
+Component Shadowing is how we handle overriding a theme's components
+```
+
+export default Section
+
+# Component Shadowing
+
+---
+
+```notes
+mirror the path, replace the component
+```
+
+# Shadowing
+
+* gatsby-theme-blog
+  * `src/components/bio.js`
+* user
+  * `src/components/gatsby-theme-blog/bio.js`
+
+---
+
+# What can we Shadow?
+
+* Components
+* Query Components
+* [pattern] Split page templates into query and render
+* Design Tokens
+* *Any File*
+---
+
+# Shadow Component
+
+```jsx
+// src/components/gatsby-theme-blog/bio.js
+import React from 'react';
+
+export default props => <div {...props}/>
+```
+
+---
+
+# Shadow Query Component
+
+```jsx
+import React from "react"
+import { StaticQuery, graphql } from "gatsby"
+import RenderComponent from './my-render-component';
+// or
+// import RenderComponent from 'gatsby-theme-blog/src/component/render-component.js';
+
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query HeadingQuery {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `}
+    render={data => <RenderComponent data={data} {...props} />}
+  />
+)
+```
+
+---
+
+```notes
+Component Shadowing gives rise to new patterns, like splitting out the
+render component of a page template. 
+
+Users can now swap out the entire page template without worrying about
+changing the data that's queried, enabling upgrades.
+```
+
+# [pattern] Page Templates
+
+```jsx
+// in the theme
+import React from "react"
+import { graphql } from "gatsby"
+import Template from '../components/blog-template.js';
+
+export default Template
+
+export const pageQuery = graphql`
+  query($path: String!) {
+    markdownRemark(frontmatter: { path: { eq: $path } }) {
+      html
+      frontmatter {
+        date(formatString: "MMMM DD, YYYY")
+        path
+        title
+      }
+    }
+  }
+`
+```
+---
+
+```notes
+Component Shadowing enables replacing any file touched by webpack
+
+Which means we can use it for layout out design system tokens on disk
+
+Swap brand colors by replacing one file
+```
+
+# Tokens
+## in src/components
+
+* /tokens/index.js
+* /tokens/colors.js
+* /tokens/spacing.js
+* /tokens/media-queries.js
+
+---
+
+export default Section
+
+```notes
+There's a natural concept of progressive disclosure when it comes to themes
+
+From component shadowing, to using gatsby lifecycles you level up each
+time you need something more complicated 
+```
+
+# Progressive Disclosure
+
+1. Use theme
+1. Shadow the Bio component
+1. Replace Page in src/pages
+1. Adding data to a page template query
+1. Adding new data formats and sources
+1. Making own themes/plugins
+
+---
+
+```notes
+Theming builds upon core gatsby concepts that you may already know
+
+preBootstrap isn't used much by plugins, but has a space in themes for
+initializing src/pages, etc.
+```
+
+# Lifecycles
+
+1. onPreBootstrap
+1. sourceNodes (`onCreateNode`)
+1. resolvableExtensions
+1. createPages (`onCreatePage`)
+1. onPreExtractQueries
+1. onPostBootstrap
+
+---
+
+# onPreBootstrap
+
+```js
+// gatsby-node.js
+// make sure src/pages exists for the filesystem source
+exports.onPreBootstrap = ({ store }) => {
+  const { program } = store.getState()
+  const dir = `${program.directory}/src/pages`
+  if (!fs.existsSync(dir)) {
+    mkdirp.sync(dir)
+  }
+}
+```
+
+---
+
+# onCreatePage
+
+```js
+exports.onCreatePage =  async ({ page, actions }, pluginOptions) => {
+  const { createPage, deletePage } = actions;
+  if(page.component === "/some/component") {
+    deletePage(page);
+    createPage({
+      ...page,
+      component: path.resolve('./the/new/template')
+    })
+  }
+}
+```
+---
+
+# Useful links
+
+* github.com/ChristopherBiscardi/gatsby-theme-examples
+* spectrum.chat/gatsby-themes
