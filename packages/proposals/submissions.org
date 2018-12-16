@@ -7,3 +7,6 @@
 | react-europe    | 2017 | advanced-static-sites                           |                  |
 | react-amsterdam | 2017 | demystifying-graphql-clients                    | <2017-04-21 Fri> |
 | qcon            | 2018 | rapidly-prototyping-with-graphql-and-prisma     | <2018-03-06 Tue> |
+| gothamgo        | 2019 | lets-go-generate                                |                  |
+| cssconfeu       | 2019 | styles-and-naming                               |                  |
+| jsconfeu        | 2019 | a-universal-design-system-substrate             |                  |
